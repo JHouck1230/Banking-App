@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Transaction Register</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+	<script src="main.js"></script>
+</head>
+<body ng-app='bankApp' ng-controller='mainCtrl'>
+	<div class="container">
+		<div class="jumbotron">
+		  <h2>Transaction Register</h2>
+  	</div>
+  	<table class="table table-striped">
+  		<thead>
+  			<th></th>
+  			<th>Date</th>
+  			<th>Description</th>
+  			<th>Credit</th>
+  			<th>Debit</th>
+  			<th>Balance</th>
+  		</thead>
+	  	<tbody>
+	  		<tr class="transaction">
+					<td>
+						<button ng-click='addTrans()' class="btn btn-success btn-xs">
+							<span class="glyphicon glyphicon-ok"></span>
+						</button>
+					</td>
+					<td>
+						<input ng-model='newTrans.date' type='date' placeholder="today">
+					</td>
+					<td>
+						<input ng-model='newTrans.desc' type='text' placeholder="Description">
+					</td>
+					<td>
+						$<input ng-model='newTrans.credit' type='number' placeholder="0.00">
+					</td>
+					<td>
+						$<input ng-model='newTrans.debit' type='number' placeholder="0.00">
+					</td>
+					<td></td>
+	  		</tr>
+	  		<tr class="transaction" ng-repeat='transaction in transactions' ng-dblclick='editTrans(transaction)'>
+					<td>
+						<button ng-click='removeTrans(transaction)' ng-show='transaction.date' class="btn btn-danger btn-xs">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</td>
+					<td>
+						<span ng-hide='transaction.editing'>{{transaction.date | date}}</span>
+						<input ng-model='transaction.date' ng-show='transaction.editing' type="date" ng-blur='submitEdit(transaction)'>
+					</td>
+					<td>
+						<span ng-hide='transaction.editing'>{{transaction.desc}}</span>
+						<input ng-model='transaction.desc' ng-show='transaction.editing' type="text" ng-blur='submitEdit(transaction)'>
+					</td>
+					<td>
+						<span ng-hide='transaction.editing'>{{transaction.credit | currency}}</span>
+						<input ng-model='transaction.credit' ng-show='transaction.editing' type="number" ng-blur='submitEdit(transaction)'>
+					</td>
+					<td>
+						<span ng-hide='transaction.editing'>{{(transaction.debit * -1) | currency}}</span>
+						<input ng-model='transaction.debit' ng-show='transaction.editing' type="number" ng-blur='submitEdit(transaction)'>
+					</td>
+					<td>
+						<span ng-hide='transaction.editing'>{{getBalance()}}</span>
+					</td>
+	  		</tr>
+	  	</tbody>
+  	</table>
+	</div>
+</body>
+</html>
