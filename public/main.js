@@ -82,14 +82,12 @@ app.controller('mainCtrl', function($scope, $http) {
 	};
 
 	$scope.getBalance = function() {
-		var balances = [];
 		var trans = $scope.transactions;
 		var balance = 0;
 		for(var i = trans.length - 1; i >= 0; i--) {
 			if(trans[i].credit)	balance += trans[i].credit;
 			if(trans[i].debit) balance -= trans[i].debit;
 			trans[i].balance = balance;
-			balances.push(balance);
 		};
 	};
 });

@@ -1,0 +1,13 @@
+.jumbotron {
+  background-color: crimson;
+  color: white;
+}
+
+table.table.table-striped {
+  background-color: linen;
+  border: 1px solid black;
+}
+
+body.ng-scope {
+  background-color: darkgray;
+}
