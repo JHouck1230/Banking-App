@@ -43,7 +43,7 @@
 					<td>
 						$<input ng-model='newTrans.debit' type='number' placeholder="0.00">
 					</td>
-					<td></td>
+					<td ng-model='transactions.total'>{{getBalance()}}</td>
 	  		</tr>
 	  		<tr class="transaction" ng-repeat='transaction in transactions' ng-dblclick='editTrans(transaction)'>
 					<td>
@@ -68,7 +68,7 @@
 						<input ng-model='transaction.debit' ng-show='transaction.editing' type="number" ng-blur='submitEdit(transaction)'>
 					</td>
 					<td>
-						<span ng-hide='transaction.editing'>{{getBalance()}}</span>
+						<span ng-hide='transaction.editing'>{{transaction.balance}}</span>
 					</td>
 	  		</tr>
 	  	</tbody>
