@@ -34,6 +34,7 @@ app.controller('mainCtrl', function($scope, $http) {
 		})
 		.then(function(res) {
 			$scope.transactions.unshift(transaction);
+			$scope.newTrans = {};
 			getBalance();
 		}, function(err) {
 			console.error(err);
@@ -81,26 +82,15 @@ app.controller('mainCtrl', function($scope, $http) {
 	};
 
 	$scope.getBalance = function() {
-		var total = 0;
 		var balances = [];
 		var trans = $scope.transactions;
 		var balance = 0;
 		for(var i = trans.length - 1; i >= 0; i--) {
-			if(trans[i].credit)	{
-				total += trans[i].credit;
-				balance += trans[i].credit;
-			}
-			if(trans[i].debit) {
-		  	total -= trans[i].debit;
-		  	balance -= trans[i].debit;
-		  }
-				
+			if(trans[i].credit)	balance += trans[i].credit;
+			if(trans[i].debit) balance -= trans[i].debit;
 			trans[i].balance = balance;
-
 			balances.push(balance);
 		};
-			$scope.transactions.total = total;
-			console.log(balances.reverse());
 	};
 });
 
