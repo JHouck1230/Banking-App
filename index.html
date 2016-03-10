@@ -23,7 +23,6 @@
   			<th>Credit</th>
   			<th>Debit</th>
   			<th>Balance</th>
-  			<th></th>
   		</thead>
 	  	<tbody>
 	  		<tr class="transaction">
@@ -45,9 +44,8 @@
 						$<input ng-model='newTrans.debit' type='number' placeholder="0.00">
 					</td>
 					<td></td>
-					<td></td>
 	  		</tr>
-	  		<tr class="transaction" ng-repeat='transaction in transactions | orderBy:"-date"' ng-dblclick='editTrans(transaction)'>
+	  		<tr class="transaction" ng-repeat='transaction in transactions | orderBy:"-date" track by $index' ng-class='getBalance($last)' ng-dblclick='editTrans(transaction)'>
 					<td>
 						<button ng-click='removeTrans(transaction)' ng-show='transaction.date' class="btn btn-danger btn-xs">
 							<span class="glyphicon glyphicon-remove"></span>
@@ -72,7 +70,6 @@
 					<td>
 						<span ng-hide='transaction.editing'>{{transaction.balance | currency}}</span>
 					</td>
-					<td ng-model='transactions.total'>{{getBalance()}}</td>
 	  		</tr>
 	  	</tbody>
   	</table>

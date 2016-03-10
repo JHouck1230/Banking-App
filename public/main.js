@@ -12,7 +12,6 @@ app.controller('mainCtrl', function($scope, $http) {
 		})
 		.then(function(res) {
 			$scope.transactions = res.data;
-			getBalance();
 		}, function(err) {
 			console.error(err);
 		});
@@ -35,7 +34,6 @@ app.controller('mainCtrl', function($scope, $http) {
 		.then(function(res) {
 			$scope.transactions.unshift(transaction);
 			$scope.newTrans = {};
-			getBalance();
 		}, function(err) {
 			console.error(err);
 		});
@@ -48,7 +46,6 @@ app.controller('mainCtrl', function($scope, $http) {
 		})
 		.then(function(res) {
 			$scope.transactions.splice($scope.transactions.indexOf(transaction), 1);
-			getBalance();
 		});
 	};
 
@@ -75,7 +72,6 @@ app.controller('mainCtrl', function($scope, $http) {
 			}
 		})
 		.then(function(res) {
-			getBalance();
 		}, function(err) {
 			console.error(err);
 		});
